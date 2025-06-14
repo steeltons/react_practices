@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
-import App from './App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Main from './main/Main';
 import List from './list/List';
+import Building from './building/Building';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: '/list',
     element: <List />
+  },
+  {
+    path: '/buildings/:structureId',
+    element: <Building />
   }
 ])
 

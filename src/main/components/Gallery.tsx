@@ -1,5 +1,6 @@
 import { Box, Container, ImageList, ImageListItem, ImageListItemBar } from '@mui/material';
 import structures from '../../data'
+import { Link } from 'react-router-dom';
 
 const imgData = structures.slice(0, -1);
 
@@ -18,15 +19,17 @@ function Gallery() {
                         }
                     }}
                 >
-                    {imgData.map((item) => (
+                    {imgData.map((item, index) => (
                         <ImageListItem key={ item.img }>
-                            <img
-                                srcSet= {item.img}
-                                src= { item.img }
-                                alt= { item.title }
-                                loading= 'lazy' 
-                            />
-                            <ImageListItemBar position='bottom' title={ item.title } />
+                            <Link to={ `/buildings/${index}` }>
+                                <img
+                                    srcSet= {item.img}
+                                    src= { item.img }
+                                    alt= { item.title }
+                                    loading= 'lazy' 
+                                />
+                                <ImageListItemBar position='bottom' title={ item.title } />
+                            </Link>
                         </ImageListItem>
                     ))}
                 </ImageList>

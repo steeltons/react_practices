@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface NavbarProps {
-    active: string;
+    active?: string;
 };
 
 interface ButtonNavbarProps extends NavbarProps {
@@ -58,7 +58,7 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 }))
 
 function SelectedButton({active, index, buttonText, linkTo} : ButtonNavbarProps) {
-    const buttonVariant = (active === index) 
+    const buttonVariant = (active) && (active === index) 
         ? 'contained'
         : 'text'
 
@@ -70,7 +70,9 @@ function SelectedButton({active, index, buttonText, linkTo} : ButtonNavbarProps)
 };
 
 function SelectedStyledMenuItem({active, index, buttonText, linkTo} : ButtonNavbarProps) {
-    const selected = (active === index);
+    const selected = (active) 
+        ? (active === index)
+        : false;
 
     return (
         <Link to={(linkTo) ? linkTo : ''}>
