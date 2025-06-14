@@ -1,4 +1,4 @@
-import { axisClasses, BarChart } from "@mui/x-charts";
+import { axisClasses, BarChart, LineChart } from "@mui/x-charts";
 import { tGroup } from "../groupdata"
 import { Container } from "@mui/material";
 import { useState } from "react";
@@ -29,6 +29,8 @@ function GroupChart({ data } : GroupChartProps) {
         'Минимальная высота': false
     })
 
+    const [isBar, setIsBar] = useState(true);
+
     const seriesY = Object.entries(series)
         .filter((item) => item[1] === true)
         .map((item) => {
@@ -41,19 +43,35 @@ function GroupChart({ data } : GroupChartProps) {
 
     return (
         <Container maxWidth='lg' >
-            <BarChart 
-                dataset={ data }
-                xAxis={[{ scaleType: 'band', dataKey: 'Группа' }]}
-                series={ seriesY }
-                barLabel={(showBarLabel) ? "value" : ""}
-                slotProps={{
-                    legend: {
-                        position: {vertical: 'bottom', horizontal: 'center'}
-                    }
-                }}
-                {...chartSetting}
-            />
-            <SettingsChart series={ series } setSeries={ setSeries }/>
+            {isBar &&
+                <BarChart 
+                    dataset={ data }
+                    xAxis={[{ scaleType: 'band', dataKey: 'Группа' }]}
+                    series={ seriesY }
+                    barLabel={(showBarLabel) ? "value" : ""}
+                    slotProps={{
+                        legend: {
+                            position: {vertical: 'bottom', horizontal: 'center'}
+                        }
+                    }}
+                    {...chartSetting}
+                />
+            }
+            {!isBar &&
+                <LineChart 
+                    dataset={ data }
+                    xAxis={[{ scaleType: 'band', dataKey: 'Группа' }]}
+                    series={ seriesY }
+                    slotProps={{
+                        legend: {
+                            position: {vertical: 'bottom', horizontal: 'center'}
+                        }
+                    }}
+                    {...chartSetting}
+                />
+            }
+            
+            <SettingsChart series={ series } setSeries={ setSeries } isBar={ isBar } setIsBar={ setIsBar }/>
         </Container>
     )
 }
