@@ -29,8 +29,8 @@ const headerButtonLabels = [
     },
     {
         index: '3',
-        buttonText: 'Контакты',
-        linkTo: '/contacts'
+        buttonText: 'Группы',
+        linkTo: '/groups'
     },
 ]
 

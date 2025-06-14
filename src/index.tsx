@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Main from './main/Main';
 import List from './list/List';
 import Building from './building/Building';
+import Chart from './chart/Chart';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: '/buildings/:structureId',
     element: <Building />
+  },
+  {
+    path: '/groups',
+    element: <Chart />
   }
 ])
 
