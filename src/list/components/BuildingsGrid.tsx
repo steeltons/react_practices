@@ -11,8 +11,8 @@ const BuidlingsGrid = () => {
         {field: 'Тип', flex: 0.5},
         {field: 'Страна', flex: 0.5},
         {field: 'Город', flex: 0.5},
-        {field: 'Год'},
-        {field: 'Высота'},
+        {field: 'Год', type: 'number'},
+        {field: 'Высота', type: 'number'},
     ]
 
     return (

@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# Лабораторная работа №4
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### Первое самостоятельное задание (Отобрать сооружения по фильтру стр. 8)
+-----
 
-## Available Scripts
+Прикреплено в файле Sorted_buildings.csv
 
-In the project directory, you can run:
+Для получения результата нужно:
 
-### `npm start`
+1. Выбрать колонки для отображения: "Название", "Тип", "Страна", "Высота"
+2. Столбец "Тип" отфильтровать на наличие слова "мачта"
+3. Сортировка по высоте - от большего к меньшему
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Второе самостоятельное задание (Исправить Navbar стр. 10)
+-----
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+В файле Navbar.tsx для таких целей (ещё в лабораторной работе 3) было сделано следующее
 
-### `npm test`
+1. Сделан компонент SelectedStyledMenuItem который принимал:
+    
+    - active - число, номер выбранного элемента меню
+    - index - номер меню в списке
+    - buttonText - текс, отображаемый на кнопке меню
+    - linkTo - (новое поле), ссылка для навигации
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Если active === index, то подсвечиваем как выбранное, иначе - нет
 
-### `npm run build`
+Код компонента и пропсов:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="./git_images/nav_menu_item_component.png">
+<img src="./git_images/nav_menu_item_component_props.png">
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Третье самостоятельное задание (Отображение информации об одном из зданий стр. 11)
+-----
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Для этого был сделан компонент Building, который объединет в себе следующее: 
 
-### `npm run eject`
+- Компонент Navbar (без параметра - чтобы не отображалась кнопка)
+- Приватный (т.к. не экспортировал) компонент BuildingCard - карточка с изображением здания, описанием
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Код карточки и компонента Building:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+const BuildingCard = ({structureId} : {structureId : number}) => {
+    const title = structures[structureId].title
+    const description = structures[structureId].description
+    const img = structures[structureId].img
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    return (
+        <>
+            <Box sx={{ padding: 2, maxWidth: "900px", margin: "auto" }}>
+                <Typography variant="h3" gutterBottom sx={{ textAlign: 'center', color: 'gray' }}>
+                    {title}
+                </Typography>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+                <img
+                    src={img}
+                    alt={title}
+                    style={{ width: "100%", maxHeight: '500px', objectFit: 'contain'}}
+                />
+            </Box>
+            <Box mt={3} sx={{ display: 'flex', flexBasis: '100%', textAlign: 'justify', columnGap: 5}}>
+                {description.map((text: string, index: number) => (
+                <Typography key={index} variant="body1" paragraph sx={{ flexGrow: 1, flexShrink: 1, flexBasis: 0 }}>
+                    {text}
+                </Typography>
+                ))}
+            </Box>
+        </>
+    )
+}
 
-## Learn More
+const Building = () => {
+    const { structureId } = useParams<{ structureId : string }>()
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    return (
+        <div>
+            <Navbar />
+            <Container maxWidth='xl' >
+                <BuildingCard structureId={ Number(structureId) } />
+            </Container>
+        </div>
+    )
+}
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Результат:
 
-### Code Splitting
+<img src="./git_images/building_card.png">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### Четвёртое самостоятельное задание (Отображение barLabel если выбран только один ряд стр. 22)
+-----
 
-### Analyzing the Bundle Size
+Для этого нужно было модифицировать компонент GroupChart
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. Пробежался массив series и отфильтровал по значению ключа = true ```{"Максимальная высота" : true, "Минимальная высота" : false} => {"Максимальная высота" : true}```
+2. Подсчитал кол-во записей, если 1, то true, иначе false
+3. BarChart если кол-во записей 1, то значение = "value", иначе ""
 
-### Making a Progressive Web App
+<img src="./git_images/bar_chart_value.png">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### Пятое самостоятельное задание (Переключение отображения диаграммы стр. 25)
+-----
 
-### Advanced Configuration
+Для этого:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. Определил состояние [isBar, setIsBar] в компоненте GroupChart
+2. Тип пропсов SettingsChart расширил значениями выше
+3. Передал в SettingsChart недостающие пропсы
+4. Перехватчик, который обновлял значение isBar при изменении компонента RadioGroup
+5. В компоненте RadioGroup в пропс onChange передал стрелочную функцию, которая при изменении компонента передавала значение !isBar в функцию-перехватчик
+6. В компоненте GroupChart добавил условие для отрисовки диаграмм по состоянию isGroup
 
-### Deployment
+Пример кода:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<img src="./git_images/chart_settings_is_bar_handle.png">
+Перехватчик и изменение состояния в RadioGroup
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img src="./git_images/group_chart_condition.png">
+Отрисовка по состоянию isBar
