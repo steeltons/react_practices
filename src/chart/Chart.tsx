@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { useState } from "react";
 import GroupGrid from "./components/GroupGrid";
 import { countries, types, years } from "./groupdata";
+import GroupChart from "./components/GroupChart";
 
 type tSelect = 'Страна' | 'Год' | 'Тип'
 
@@ -43,7 +44,8 @@ const Chart = () => {
           </Select>
         </FormControl>
       </Box>
-      <GroupGrid data={groupData}/>
+      {/* <GroupGrid data={groupData}/> */}
+      <GroupChart data={groupData} />
     </div>
   );
 }
