@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# Лабораторная работа № 3
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### Первое самостоятельное задание (Выделение пункта и эффект при наведении стр. 11)
 
-## Available Scripts
+Для этого:
 
-In the project directory, you can run:
+1. Сделал компонент SelectedStyledMenuItem который принимает:
+    
+    - active - число, номер выбранного элемента меню
+    - index - номер меню в списке
+    - buttonText - текс, отображаемый на кнопке меню
 
-### `npm start`
+2. Вынес в массив все названия кнопок в меню
+3. Итерирую массив названий и на их основе создаю компонент SelectedStyledMenuItem
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Аналогично было сделано и для кнопок не бургер-меню
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Пример кода:
 
-### `npm test`
+<img src="./git_images/first_step_1.png">
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Для добавления эффекта изменения цвета при наведении следал следующее:
 
-### `npm run build`
+1. Создал компонент StyledMenuItem, в котором переопределил псевдокласс :hover на изменение цвета фона + повесил задержу для изменения цвета в 0.3 секунды
+2. Для выбранной кнопки задал свой цвет (через псевдокласс у Mui-selected)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Пример кода:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img src="./git_images/first_step_2.png">
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
+#### Второе самостоятельное задание (Изменение компонентов Content и BuildCard стр. 20)
 
-### `npm run eject`
+Для этого:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. В файле BuildCard.tsx создал компонент StyledTypography для вывода описания здания
+2. В компонент BuildCard добавил пропс, в котором передал номер карточки из компонента Content
+3. В зависимости от номера карточки установить порядок вывода рисунка в карточку и положение кнопки Подробнее.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Пример кода:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<img src="./git_images/second_step_1.png">
+Добавление нового значения в пропс
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<img src="./git_images/second_step_2.png">
+Зависимость от номера карточки установить порядок вывода рисунка в карточку и положение кнопки Подробнее
 
-## Learn More
+<img src="./git_images/second_step_3.png">
+Передача нового значения в компоненте Content
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
+#### Третье самостоятельное задание (Реализация компонента Footer)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Для этого:
 
-### Code Splitting
+1. Создал новый компонент Footer
+2. Разделил место на 3 колонки
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    - Первая с краткой информации и знаком копирайта
+    - Вторая с кликабельными разделами
+    - Третья с кликабельными значками соц. сетей
+3. Для соц. сетей установил либу @mui/icons-material , в которых и содержатся svg иконки соц сетей
 
-### Analyzing the Bundle Size
+Пример футера:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<img src="./git_images/third_step_1.png">
 
-### Making a Progressive Web App
+Пример кода:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<img src="./git_images/third_step_2.png">
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Основная часть кода находится в /components/Footer.tsx

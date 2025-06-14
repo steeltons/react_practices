@@ -20,7 +20,7 @@ const StyledTypograhy = styled(Typography)(({ theme }) => ({
 
 function BuildingCard({ building, cardNumber } : ComponentProps) {
     return (
-        <Card sx={{ display: 'flex' }}>
+        <Card sx={{ display: 'flex', flexDirection: (cardNumber % 2 === 0) ? 'row-reverse' : 'row' }}>
             <Box>
                 <CardContent>
                     <Typography gutterBottom variant="h5">
@@ -32,7 +32,7 @@ function BuildingCard({ building, cardNumber } : ComponentProps) {
                         </StyledTypograhy>
                     )) }
                 </CardContent>
-                <CardActions sx={{ justifyContent: 'start' }}>
+                <CardActions sx={{ justifyContent: (cardNumber % 2 === 0) ? 'start' : 'end' }}>
                     <Button size="small">Подробнее</Button>
                 </CardActions>
             </Box>
