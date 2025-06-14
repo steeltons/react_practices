@@ -1,5 +1,5 @@
 import { Box, Container, ImageList, ImageListItem, ImageListItemBar } from '@mui/material';
-import structures from '../data'
+import structures from '../../data'
 
 const imgData = structures.slice(0, -1);
 

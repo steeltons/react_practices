@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import MenuIcon from "@mui/icons-material/Menu"
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface NavbarProps {
     active: string;
@@ -11,10 +12,27 @@ interface NavbarProps {
 
 interface ButtonNavbarProps extends NavbarProps {
     index : string
-    buttonText : string
+    buttonText : string,
+    linkTo? : string
 };
 
-const headerButtonLabels: string[] = ['Главная', 'Список зданий', 'Контакты'];
+const headerButtonLabels = [
+    {
+        index: '1',
+        buttonText: 'Главная',
+        linkTo: '/'
+    },
+    {
+        index: '2',
+        buttonText: 'Список зданий',
+        linkTo: '/list'
+    },
+    {
+        index: '3',
+        buttonText: 'Контакты',
+        linkTo: '/contacts'
+    },
+]
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     display: 'flex',
@@ -39,18 +57,26 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
     }
 }))
 
-function SelectedButton({active, index, buttonText} : ButtonNavbarProps) {
+function SelectedButton({active, index, buttonText, linkTo} : ButtonNavbarProps) {
     const buttonVariant = (active === index) 
         ? 'contained'
         : 'text'
 
-    return <Button variant={ buttonVariant } color="info" size="medium">{ buttonText }</Button>
+    return (
+        <Link to={(linkTo) ? linkTo : ''}>
+            <Button variant={ buttonVariant } color="info" size="medium">{ buttonText }</Button>
+        </Link>
+    )
 };
 
-function SelectedStyledMenuItem({active, index, buttonText} : ButtonNavbarProps) {
+function SelectedStyledMenuItem({active, index, buttonText, linkTo} : ButtonNavbarProps) {
     const selected = (active === index);
 
-    return <StyledMenuItem selected={ selected }>{ buttonText }</StyledMenuItem>
+    return (
+        <Link to={(linkTo) ? linkTo : ''}>
+            <StyledMenuItem selected={ selected }>{ buttonText }</StyledMenuItem>
+        </Link>
+    )
 };
 
 
@@ -78,8 +104,8 @@ const Navbar = ({ active } : NavbarProps) => {
                     </Typography>
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         {/* Замена Button для отображения активных кнопок */}
-                        {headerButtonLabels.map((text, index) => (
-                            <SelectedButton active={ active } index={ (index + 1).toString() } buttonText={ text } />
+                        {headerButtonLabels.map((obj) => (
+                            <SelectedButton active={ active } index={ obj.index } buttonText={ obj.buttonText } linkTo={ obj.linkTo } />
                         ))}
                     </Box>
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -105,8 +131,8 @@ const Navbar = ({ active } : NavbarProps) => {
                             </Box>
                             <Box>
                                 {/* Замена MenuItem для отображения активных кнопок */}
-                                {headerButtonLabels.map((text, index) => (
-                                    <SelectedStyledMenuItem active={ active } index={ (index + 1).toString() } buttonText={ text } />
+                                {headerButtonLabels.map((obj) => (
+                                    <SelectedStyledMenuItem active={ active } index={ obj.index } buttonText={ obj.buttonText } linkTo={ obj.linkTo } />
                                 ))}
                             </Box>
                         </Drawer>

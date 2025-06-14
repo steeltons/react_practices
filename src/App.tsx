@@ -1,17 +1,15 @@
 import './styles/App.css';
 import Navbar from './components/Navbar';
-import Gallery from './components/Gallery';
+import Gallery from './main/components/Gallery';
 import Footer from './components/Footer';
-import Content from './components/Content';
+import Content from './main/components/Content';
+import List from './list/List';
 
 function App() {
   return (
-   <div>
-    <Navbar active='1'/>
-    <Gallery />
-    <Content />
-    <Footer />
-   </div>
+   <>
+    <List />
+   </>
   );
 }
 

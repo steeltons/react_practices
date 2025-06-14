@@ -1,6 +1,6 @@
 import { Container, Grid } from "@mui/material";
 import BuildCard from './BuildCard'
-import structures from "../data";
+import structures from "../../data";
 
 const cardData = [structures[3], structures[6], structures[9], structures[7]];
 
